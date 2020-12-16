@@ -16,35 +16,17 @@
 #tryagainbtn {
     margin: auto;
     display: block;
-    padding: 10px;
+    padding: 20px;
     font-size: 25px;
-    border-radius: 14px;
+    border-radius: 5px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     top: 75%;
 }
 
-#leaderbtn {
-    margin: auto;
-    margin-bottom: 5px;
-    display: block;
-    padding: 10px;
-    font-size: 30px;
-    border-radius: 14px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 60%;
-}
-
-button {
-    font-family: "Comic Sans MS", cursive, sans-serif;
-    border-radius: 5px;
-    font-size: 25px;
-    padding: 20px;
-}
-button:hover {
+#tryagainbtn:hover {
     color: white;
     background-color: rgb(50, 50, 50);
 }
@@ -64,25 +46,13 @@ button:hover {
     #tryagainbtn {
         margin: auto;
         display: block;
-        padding: 10px;
+        padding: 20px;
         font-size: 25px;
-        border-radius: 14px;
+        border-radius: 5px;
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
         top: 70%;
         padding: 20px;
-    }
-    
-    #leaderbtn {
-        margin: auto;
-        display: block;
-        padding: 10px;
-        font-size: 4vw;
-        border-radius: 14px;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 62%;
     }
 }

@@ -1,6 +1,6 @@
-
 /**
- * This function will save the score in the user's database
+ * This function will save the score in the user's database.
+ * Database code snippet was adapted from: https://youtu.be/qWy9ylc3f9U?t=707
  */
 function saveScoreDB(thisScore) {
     // Gets DB score and comapares with current score.

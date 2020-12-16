@@ -2,16 +2,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    /* animation-name: countdownSize; */
-    animation-duration: 1s;
-    animation-delay: 1s;
-    /* animation-iteration-count: 4; */
     transform: translate(-50%, -50%);
-}
-
-@keyframes countdownSize {
-     0%   {font-size: 30px;}
-    100% {font-size: 80px;}
 }
 
 #timerbar-container {
@@ -21,7 +12,7 @@
 
 #timerbar {
     position: absolute;
-    bottom: 5px;
+    bottom: 1%;
     margin: 5px;
     width: 95%;
     height: 7vh;

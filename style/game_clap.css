@@ -1,3 +1,4 @@
+/* Style for mobile view. */
 @media (max-width: 800px) {
     #handImg {
         position: absolute;
@@ -10,6 +11,9 @@
     }
 }
 
+/**
+* Style for desktop view.
+*/
 @media (min-width: 801px) {
     #handImg {
         position: absolute;

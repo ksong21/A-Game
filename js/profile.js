@@ -1,4 +1,7 @@
-// Your web app's Firebase configuration
+// Your web app's Firebase configuration.
+/**
+ * CDN source: https://console.firebase.google.com/project/a-game-9c74b/settings/general/web:NWVhYjQwY2MtMDNlYy00OGU5LWFkMTEtYjYwMTI5MzY5MGQ0
+ */
 var firebaseConfig = {
     apiKey: "AIzaSyCCJQ7caXKHBoauJubhiWYarLcALUITOyw",
     authDomain: "a-game-9c74b.firebaseapp.com",
@@ -8,18 +11,17 @@ var firebaseConfig = {
     messagingSenderId: "508808118558",
     appId: "1:508808118558:web:1c92df236e6b671b3b490f"
 };
-// Initialize Firebase
+// Initialize Firebase.
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const userCollection = db.collection("userProfile");
 let profileName;
 let profileScore;
 let profileEmail;
-
 let currentUser;
 
 /**
- * Creates profile page
+ * Creates profile page.
  */
 async function profileMain() {
     clearInterval(bobbing);
@@ -38,15 +40,15 @@ async function profileMain() {
 
 /**
  * Check if the user has logined or not.
+ * AuthStateChanged was adapted from: https://firebase.google.com/docs/auth/web/start
  */
 function checkLogin() {
-    //Displays information based on user login info, gets called when ever user login state changes
+    //Displays information based on user login info, gets called when ever user login state changes.
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
             var email = user.email;
             currentUser = user;
-            console.log(currentUser);
         } else {
             // No user is signed in.
             alert("Please login!");
@@ -82,7 +84,7 @@ async function deleteInfo() {
 }
 
 /**
- * Creates profile page elements
+ * Creates profile page elements.
  */
 function createProfilePage() {
     let container = document.createElement('div');
@@ -107,6 +109,7 @@ function createProfilePage() {
     let resetScore = document.createElement('button');
     resetScore.innerHTML = "Reset Score";
     resetScore.id = "resetScore";
+    
     resetScore.onclick = scoreReset;
     container.appendChild(resetScore);
 
@@ -115,4 +118,16 @@ function createProfilePage() {
     deleteAccount.id = "deleteAccount";
     deleteAccount.onclick = deleteInfo;
     container.appendChild(deleteAccount);
+
+    /**
+     * Blinker function.
+     */
+    setInterval(function() {
+        displayScore = document.getElementById("userScore");
+        if (displayScore.style.backgroundColor == "yellow") {
+            displayScore.style.backgroundColor = "";
+        } else {
+            displayScore.style.backgroundColor = "yellow";
+        }
+    }, 1000);
 }

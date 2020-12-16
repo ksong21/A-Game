@@ -32,7 +32,7 @@ function clickHandler() {
     virusCounter--;
     document.body.removeChild(this);
     score += 5;
-    displayScore();
+    displayGameScore();
 }
 
 /**

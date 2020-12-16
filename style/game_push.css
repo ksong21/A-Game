@@ -1,5 +1,4 @@
 #isolationBody {
-    /* background-image: url("../Images/Background.png"); */
     background-size: 100% 100%;
     background-attachment: fixed;;
     background-repeat: no-repeat;
@@ -9,7 +8,6 @@
     font-size: 4vw;
     background-color: white;
     text-align: center;
-
 }
 
 #player {
@@ -19,7 +17,6 @@
     width: 13vh;
     left: 50%;
     top: 50%;
-    
 }
 
 .enemy1 {
@@ -28,7 +25,6 @@
     height: 25vh;
     width: 15vh;
     transition: right .1s linear;
-    
 }
 
 .enemy2 {
@@ -37,11 +33,10 @@
     height: 25vh;
     width: 15vh;
     transition: left .1s linear;
-    
 }
 
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
     #player {
         height: 20vh;
         width: 10vh;

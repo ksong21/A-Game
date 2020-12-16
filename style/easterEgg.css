@@ -1,3 +1,5 @@
+/* Adapted from: https://www.youtube.com/watch?v=HpOi_tSMAoY */
+
 .aboutTextEaster::before,
 .aboutTextEaster::after {
     content: attr(data-text);
@@ -11,12 +13,16 @@
     top: 0;
     left: 0;
     z-index: -2;
-
 }
 
-#activated{
+#activated {
     -webkit-text-stroke-width: px;
     -webkit-text-stroke-color: hotpink;
+        position: absolute;
+        text-align: center ;
+        left:30vw;
+        font-size: 4vh;
+        top:-15vh;
 }
 
 #kevinS,
@@ -51,7 +57,6 @@
         top: 0;
         left: 0;
         z-index: -2;
-
     }
 
     #kevinS,
@@ -74,11 +79,6 @@
     animation: glitch-effect 1s infinite;
     top: -3px;
     left: 3px;
-}
-
-#activated{
-    top: "+10px";
-    font-size: 4vh;
 }
 
 @keyframes glitch-effect {

@@ -4,11 +4,11 @@ let nextGameTimer;
 let gamePause;
 
 /**
- *  The timer bar that is shown above every game
+ *  The timer bar that is shown above every game.
  *  slowly decreases to the left based on the remaining amount of time.
  */
  function timerbar(time) {
-    // represents the amount of secs remaining to beat the mini-game
+    // Represents the amount of secs remaining to beat the mini-game.
     let sec = time;
     let pauseSec = 0;
     let widthdelay = 100;
@@ -16,13 +16,12 @@ let gamePause;
     let timerbar = document.getElementById("timerbar");
     timerbar.style.transition = "width " + sec + "s linear";
 
-    // Ensures the timer is loaded first
+    // Ensures the timer is loaded first.
     setTimeout(function() {
         timerbar.style.width = "0%";
     },widthdelay);
-
     
-    //Just to showcase the number
+    // Just to showcase the number.
     let timerbarNum = setInterval(function() {
         sec--;
         timerbar.innerHTML = sec;
@@ -39,15 +38,13 @@ let gamePause;
         } else {
             document.body.innerHTML = "";
             gameOverScreen();
-            
         }
-
     }, (sec * 1000));
 
-    // Pause the time bar
+    // Pause the time bar.
     document.getElementById("pausebtn").onclick = function() {
         pauseSec = sec;
-        // get the current width of the timer bar
+        // Get the current width of the timer bar.
         let timerbarWidth = window.getComputedStyle(timerbar).getPropertyValue("width");
         timerbar.style.width = timerbarWidth;
         timerbar.style.animationPlayState = "paused";
@@ -59,7 +56,7 @@ let gamePause;
         document.getElementById("pausebtn").style.display = "none";
     }
 
-    // The resume button
+    // The resume button.
     document.getElementById("menuResume").onclick = function() {
         document.getElementById("pauseMenu").style.display = "none";
         document.getElementById("pausebtn").style.display = "inline-block";
@@ -71,7 +68,7 @@ let gamePause;
 }
 
 /**
- * call the timerbar function after user clicks the "resume" button
+ * Call the timerbar function after user clicks the "resume" button.
  */
 function respawnTimer(time)  {
     timerbar(time);

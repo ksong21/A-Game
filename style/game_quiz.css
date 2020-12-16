@@ -10,11 +10,6 @@
     text-align: center;
 }
 
-.answers {
-    font-size: 50px;
-
-}
-
 .item1 {
     grid-area: "Question";
 }
@@ -34,38 +29,43 @@
 .item5 {
     grid-area: "Ans4";
 }
-@media only screen and (min-width: 700px){
-.grid_container {
-    display: grid;
-    grid-template-areas:
-        "Question Question"
-        "Ans1 Ans2"
-        "Ans3 Ans4";
-    grid-gap: 10px;
 
+@media only screen and (min-width: 700px) {
+    .grid_container {
+        display: grid;
+        grid-template-areas:
+            "Question Question"
+            "Ans1 Ans2"
+            "Ans3 Ans4";
+        grid-gap: 10px;
+    }
+
+    .grid_container>div {
+        background-color: transparent;
+    }
+
+    .item1 {
+        grid-column: 1 / span 2;
+    }
+
+    #question {
+        font-size: 80px;
+        margin: 50px 50px 50x 50px;
+    }
+
+    .item2,
+    .item3,
+    .item4,
+    .item5 {
+        border: 10px solid black;
+        
+    }
+
+    .answers {
+        font-size: 50px;
+    }
 }
 
-.grid_container>div {
-    background-color: transparent;
-}
-
-.item1 {
-    grid-column: 1 / span 2;
-}
-
-#question {
-    font-size: 80px;
-    margin: 50px 50px 50x 50px;
-}
-.item2,
-.item3,
-.item4,
-.item5 {
-    border: 10px solid black;
-    
-}
-
-}
 @media only screen and (max-width: 699px) {
     .grid_container {
         display: grid;
@@ -76,7 +76,6 @@
             "Ans3" 
             "Ans4";
         grid-gap: 10px;
-    
     }
     
     .grid_container>div {
@@ -85,18 +84,21 @@
     
     #question {
         font-size: 20px;
+        padding-top: 10%;
     }
+
     .item2,
-.item3,
-.item4,
-.item5 {
-    border: 2px solid black;
+    .item3,
+    .item4,
+    .item5 {
+        border: 2px solid black;
+    }
+
+    .answers {
+        font-size: 30px;
+    }
 }
-}
-.item2,
-.item3,
-.item4,
-.item5 {
-    border: 10px solid black;
-    
+
+#a1, #a2, #a3, #a4 {
+    text-align: center;
 }

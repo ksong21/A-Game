@@ -8,7 +8,7 @@
     <body>
         <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 
-        <img src="images/title.png" id="gameName">
+        <img src="images/title2.png" id="gameName">
 
         <div id="loginBox">
             <input type="text" placeholder="Username" id="username">
@@ -16,13 +16,15 @@
             <input type="password" placeholder="Password" id="password">
             <input type="password" placeholder="Confirm password" id="confirmPassword">
             <button onclick="backToLogin()" id="backToLogin">Back to Login</button>
-            <button onclick="signup()" id="signup">Finish Sign Up</button>
+            <button onclick="signup()" id="signup">Sign Up</button>
             <p id="signUpAlert"></p>
         </div>
         
         <video autoplay muted loop id="myVideo">
             <source src="images/background.mp4" type="video/mp4">
         </video>
+
+        <script src="js/universalButtons.js"></script>
 
         <!-- The core Firebase JS SDK is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>

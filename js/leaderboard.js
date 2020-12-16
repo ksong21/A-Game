@@ -1,17 +1,3 @@
-// // Your web app's Firebase configuration
-// var firebaseConfig = {
-//     apiKey: "AIzaSyCCJQ7caXKHBoauJubhiWYarLcALUITOyw",
-//     authDomain: "a-game-9c74b.firebaseapp.com",
-//     databaseURL: "https://a-game-9c74b.firebaseio.com",
-//     projectId: "a-game-9c74b",
-//     storageBucket: "a-game-9c74b.appspot.com",
-//     messagingSenderId: "508808118558",
-//     appId: "1:508808118558:web:1c92df236e6b671b3b490f"
-// };
-// // Initialize Firebase
-// firebase.initializeApp(firebaseConfig);
-// const db = firebase.firestore();
-
 /**
  * Creates a leaderBoard page.
  */

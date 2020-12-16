@@ -1,3 +1,6 @@
+/**
+ * Saves the user's score in the database and creates the gameover screen.
+ */
 async function gameOverScreen() {
     await saveScoreDB(score);
 
@@ -26,5 +29,8 @@ async function gameOverScreen() {
  */
 function tryagainbtnClick() {
     score = 0;
-    document.location.reload();
+    document.body.innerHTML = "";
+    gameOver = false;
+    easterEgg = false;
+    mainMenu();
 }

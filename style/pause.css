@@ -14,9 +14,10 @@
     height: 40px;
     position: absolute;
     top: 2vh;
-    left: 10px;
+    left: 30px;
     cursor: pointer;
     z-index: 1;
+    transform: translateX(-50%);
 }
 
 #menuResume {

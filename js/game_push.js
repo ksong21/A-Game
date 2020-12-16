@@ -1,4 +1,4 @@
-// The player position on the map
+// The player position on the map.
 const playerY = 50 + "%";
 
 let tooClose = false;
@@ -10,6 +10,10 @@ let moveInterval;
 
 let enemy1NotSpawn;
 let enemy2NotSpawn;
+
+// Enemy hit sound effect.
+let HitSFX = document.createElement("AUDIO");
+HitSFX.src = "audio/blopSound.mp3";
 
 /**
  * Starts the isolation game.
@@ -24,10 +28,9 @@ function startIsolationGame() {
 }
 
 /**
- * Create the player model
+ * Create the player model.
  */
 function createPlayer() {
-    //<img id = "player" src="Images/Player.png" alt="Player"></img>
     let player = document.createElement('img');
     player.id = "player";
     if (easterEgg == true){
@@ -40,7 +43,7 @@ function createPlayer() {
 }
 
 /** 
- * An enemy1 constructor 
+ * An enemy1 constructor.
  */
 function Enemy1() {
     this.position = 0;
@@ -48,10 +51,10 @@ function Enemy1() {
     this.person.setAttribute("style", "display: none");
     this.person.setAttribute("draggable", "false");
 
-    // Spawn the enemy to the right side
+    // Spawn the enemy to the right side.
     this.spawnRight = function () {
         if (!gamePause) {
-            // easterEgg
+            // EasterEgg.
             if (easterEgg == true){
                 this.person.setAttribute("src", "images/tegEnemy.png");  
             } else{
@@ -64,17 +67,16 @@ function Enemy1() {
             this.person.style["right"] = "0px";
             enemy1NotSpawn = false;
         } else {
-            // did not spawn
+            // Did not spawn.
             enemy1NotSpawn = true;
         }
-
     };
 
-    //Move the enemy in the correct direction
+    // Move the enemy in the correct direction.
     this.movement = function () {
-        let windowSize700 = window.matchMedia("(max-width: 700px)");
+        let windowSize700 = window.matchMedia("(min-width: 700px)");
         let speed = windowChange(windowSize700);
-        windowSize700.addListener(windowChange);
+        
         if (gamePause) {
             speed = 0;
         }
@@ -82,15 +84,11 @@ function Enemy1() {
         this.person.style["right"] = parseInt(this.person.style["right"]) + speed + "px";
         this.position = parseInt(this.person.style["right"]);
     };
-
     document.body.appendChild(this.person);
-
 }
 
-
-
 /** 
- * An enemy2 constructor 
+ * An enemy2 constructor.
  */
 function Enemy2() {
     this.position = 0;
@@ -100,7 +98,7 @@ function Enemy2() {
 
     this.spawnLeft = function () {
         if (!gamePause) {
-            // easterEgg
+            // EasterEgg.
             if (easterEgg == true){
                 this.person.setAttribute("src", "images/tegEnemy2.png");  
             } else{
@@ -117,36 +115,32 @@ function Enemy2() {
         }
     };
 
-    //Move the enemy in the correct direction
+    //Move the enemy in the correct direction.
     this.movement = function () {
-        let windowSize700 = window.matchMedia("(max-width: 700px)");
+        let windowSize700 = window.matchMedia("(min-width: 700px)");
         let speed = windowChange(windowSize700);
-        windowSize700.addListener(windowChange);
         if (gamePause) {
             speed = 0;
         }
         this.person.style["left"] = parseInt(this.person.style["left"]) + speed + "px";
         this.position = parseInt(this.person.style["left"]);
     };
-
     document.body.appendChild(this.person);
 }
 
 /**
- * Handles @media and checks the screens size, adjusts speed of enemy
+ * Handles @media and checks the screens size, adjusts speed of enemy.
  */
 function windowChange(size) {
     if (size.matches) {
-        return 15;
+        return 40;
     } else {
-        return 30;
+        return 20;
     }
 }
 
-
-
 /**
- * Move the enemies towards the player
+ * Move the enemies towards the player.
  */
 function movementInterval(enemy1, enemy2) {
     let spawn1time = Math.floor(Math.random() * 3) + 1;
@@ -155,22 +149,22 @@ function movementInterval(enemy1, enemy2) {
     let middle = (window.innerWidth / 2);
     let spacing = middle * 0.10;
     
-    // Movement for enemy 1
+    // Movement for enemy 1.
     let spawn1 = setTimeout(function () {
         enemy1.spawnRight();
 
         let move = setInterval(function () {
             let movement1 = enemy1.movement();
-            // Check if enemy has spawned or not
+            // Check if enemy has spawned or not.
             if (enemy1NotSpawn) {
                 enemy1.spawnRight();
-                
             }
 
-            // When the enemy is clicked, they are removed and interval ends
+            // When the enemy is clicked, they are removed and interval ends.
             enemy1.person.onclick = function () {
                 clearInterval(move);
                 score += 10;
+                HitSFX.play();
                 enemy1.person.remove();
             }
 
@@ -181,25 +175,25 @@ function movementInterval(enemy1, enemy2) {
                 enemy1.person.remove();
             }
         }, 90);
-
     }, (spawn1time * 1000));
 
-    //movement for enemy 2
+    //Movement for enemy 2.
     let spawn2 = setTimeout(function () {
         enemy2.spawnLeft();
 
         let move = setInterval(function () {
             let movement2 = enemy2.movement();
 
-            // Check if enemy has spawned or not
+            // Check if enemy has spawned or not.
             if (enemy2NotSpawn) {
                 enemy2.spawnLeft();
-                
             }
-            // When the enemy is clicked, they are removed and interval ends
+
+            // When the enemy is clicked, they are removed and interval ends.
             enemy2.person.onclick = function () {
                 clearInterval(move);
                 score += 10;
+                HitSFX.play();
                 enemy2.person.remove();
             }
 
@@ -208,15 +202,13 @@ function movementInterval(enemy1, enemy2) {
                 tooClose = true;
                 document.getElementById("player").src = "images/tombstone.png";
                 enemy2.person.remove();
-
             }
-
         }, 100);
     }, (spawn2time * 1000));
 }
 
 /**
- * Spawn the 2 enemies
+ * Spawn the 2 enemies.
  */
 function generateEnemies() {
     enemy1 = new Enemy1();
@@ -236,11 +228,11 @@ function endPush() {
         clearInterval(timerbarNum);
         clearInterval(nextGameTimer);
     }
-
-
 }
 
-
+/**
+ * Losing messege displayed in the game over screen.
+ */
 function pushMessage() {
     return "You could not push everyone away. Make sure you stay at least 6 feet away from people to avoid transfer of germs.";
 }

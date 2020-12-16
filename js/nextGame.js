@@ -1,16 +1,22 @@
 let score = 0;
 let count = 4;
-let sneeze = new Game("Cover their mouths","Tap when green", startSneezeGame, endSneeze, sneezeMessage);
-let handWash = new Game("Kill the germs!","Tap", generateObjects, endHandwash, handwashMessage);
-let quiz = new Game("Trivia", "Tap on the right answer", startQuizGame, endQuiz,whyQuizOver);
+
+// Initilizes all the games.
+let sneeze = new Game("Cover their mouths", "Tap when green", startSneezeGame, endSneeze, sneezeMessage);
+let handWash = new Game("Kill the germs!", "Tap", generateObjects, endHandwash, handwashMessage);
+let quiz = new Game("Trivia", "Tap on the right answer", startQuizGame, endQuiz, whyQuizOver);
 let push = new Game("Isolation", "Tap, dont let them touch you", startIsolationGame, endPush, pushMessage);
-let mask = new Game("Put A Mask On!", "Drag and drop the mask", startMask, endMask, maskMessage);
-let buttonPress = new Game("Press good button", "tap", startButtonpress, buttonpressOver, buttonmessage);
+let mask = new Game("Put A Mask On!", "Tap to select the correct mask", startMask, endMask, maskMessage);
+let buttonPress = new Game("Press green button", "tap", startButtonpress, buttonpressOver, buttonmessage);
 let clap = new Game("Applaud!", "Tap as fast as you can", startClap, endClap, clapMessage);
-let gameList = [mask];
+let nomove = new Game("Break","Don't do anything",breakstart,breakend,breakfailmessage);
+let gameList = [sneeze, handWash, quiz, buttonPress, push, mask, clap, nomove];
 let game;
 let gameOver = false;
 
+/**
+ * Main function that is called to create the next game screen.
+ */
 function nextGamePage() {
     createScore();
     createPauseMenu();
@@ -18,20 +24,20 @@ function nextGamePage() {
     createTimer();
     createInstructions();
     game = selectGame();
-    countdown(3);    
+    countdown(3);
     setGameTitle(game);
     setInstructions(game);
     createMuteButton();
 }
 
 /**
- * 
+ * Creates a game object.
  * @param {The name of the mini-game as a string} gameName 
  * @param {The instructions for the game as a string} instructions 
  * @param {Starter Function that starts the game.} starterFunction
  * @param {The functions that ends the game} endFunction  
  */
-function Game(gameName, instructions, starterFunction, endFunction, gameOverMessage){
+function Game(gameName, instructions, starterFunction, endFunction, gameOverMessage) {
     this.gameName = gameName;
     this.instructions = instructions;
     this.starterFunction = starterFunction;
@@ -41,33 +47,33 @@ function Game(gameName, instructions, starterFunction, endFunction, gameOverMess
     /**
      * Gets the name of the game.
      */
-    this.getName = function(){
+    this.getName = function () {
         return gameName;
     }
 
     /**
      * Gets the instructions for the game.
      */
-    this.getInstructions = function(){
+    this.getInstructions = function () {
         return instructions;
     }
 
     /**
      * Runs the game start function for this game.
      */
-    this.startGame = function(){
+    this.startGame = function () {
         this.starterFunction();
         createMuteButton();
     }
 
     /**
-     * Runs the game end function
+     * Runs the game end function.
      */
-    this.endGame = function(){
+    this.endGame = function () {
         this.endFunction();
     }
 
-    this.getMessage = function() {
+    this.getMessage = function () {
         return this.gameOverMessage();
     }
 }
@@ -76,7 +82,7 @@ function Game(gameName, instructions, starterFunction, endFunction, gameOverMess
  * Sets the game title on the html page.
  * @param {A game object} gameObj 
  */
-function setGameTitle(gameObj){
+function setGameTitle(gameObj) {
     let title = document.getElementById('title');
     title.innerText = gameObj.getName();
 }
@@ -85,39 +91,36 @@ function setGameTitle(gameObj){
  * Sets the game instructions on the html page.
  * @param {A game object} gameObj 
  */
-function setInstructions(gameObj){
+function setInstructions(gameObj) {
     let instructions = document.getElementById('instructions');
     instructions.textContent = gameObj.getInstructions();
     instructions.style.backgroundColor = "#CCCCCC";
-    instructions.style.fontSize = "3vh" ;
+    instructions.style.fontSize = "3vh";
     instructions.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
 }
 
 /**
  * For the countdown that happens before the game.
- * Makes the numbers big and counts down to 0
+ * Makes the numbers big and counts down to 0.
  */
 function countdown(time) {
     let num = time;
     let pausenum = 0;
     let counter = document.getElementById("timer");
-    counter.style.animationIterationCount = num + 1;
-    
 
     let timer = setInterval(function () {
         counter.innerHTML = num;
         num--;
-        
-        // When the pause button is clicked, pause the game
-        document.getElementById("pausebtn").onclick = function() {
+
+        // When the pause button is clicked, pause the game.
+        document.getElementById("pausebtn").onclick = function () {
             pausenum = num;
-            counter.setAttribute("style", "animation-play-state: paused;");
             clearInterval(timer);
             document.getElementById("pauseMenu").style.display = "block";
             document.getElementById("pausebtn").style.display = "none";
             document.getElementById("title").style.color = "white";
         }
-        
+
         if (num < 0) {
             clearInterval(timer);
             counter.innerHTML = "Start!";
@@ -125,18 +128,17 @@ function countdown(time) {
             setTimeout(function () {
                 counter.style.display = "none";
                 document.body.innerHTML = "";
-                if (gameOver == false){
+                if (gameOver == false) {
                     game.startGame();
                 }
-                
+
             }, 1000);
         }
     }, 1000);
-    
-    // The resume button
-    document.getElementById("menuResume").onclick = function() {
+
+    // The resume button.
+    document.getElementById("menuResume").onclick = function () {
         document.getElementById("pauseMenu").style.display = "none";
-        counter.setAttribute("style", "animation-play-state: running;");
         document.getElementById("pausebtn").style.display = "inline-block";
         document.getElementById("title").style.color = "black";
         countdown(pausenum);
@@ -144,9 +146,9 @@ function countdown(time) {
 }
 
 /**
-*  Selects a random game from the gameList.
-*/
-function selectGame(gameObj){
+ *  Selects a random game from the gameList.
+ */
+function selectGame(gameObj) {
     let nextGame = gameList[Math.floor(Math.random() * gameList.length)];
     return nextGame;
 }
@@ -154,7 +156,7 @@ function selectGame(gameObj){
 /**
  * Creates the Title for the html page.
  */
-function createTitle(){
+function createTitle() {
     let title = document.createElement('h1');
     document.body.appendChild(title);
     title.id = "title";
@@ -163,7 +165,7 @@ function createTitle(){
 /**
  * Creates timer element for the HTML page.
  */
-function createTimer(){
+function createTimer() {
     let timer = document.createElement('h1');
     timer.id = "timer";
     document.body.appendChild(timer);
@@ -172,8 +174,7 @@ function createTimer(){
 /**
  * Creates the instruction element for the HTML page.
  */
-function createInstructions(){
-
+function createInstructions() {
     let ins = document.createElement('p');
     ins.id = "instructions";
     document.body.appendChild(ins);
@@ -186,9 +187,9 @@ function createInstructions(){
  */
 function createScore(screen) {
     let scoreBoard = document.createElement("p");
-    if (screen == "gameScore"){
+    if (screen == "gameScore") {
         scoreBoard.id = "gameScore";
-    } else if (screen = "nextGameScore"){
+    } else if (screen = "nextGameScore") {
         scoreBoard.id = "nextGameScore";
     } else if (screen = "gameOverScore") {
         scoreBoard.id = "gameOverScore"
@@ -199,9 +200,8 @@ function createScore(screen) {
 
 /**
  * Displays the current socre on the 'p' element created by 
- * 'create score' function
+ * 'create score' function.
  */
-function displayScore() {
+function displayGameScore() {
     document.getElementById("gameScore").innerHTML = "Score: " + score;
 }
-

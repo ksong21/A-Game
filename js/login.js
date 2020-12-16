@@ -1,4 +1,7 @@
-// Your web app's Firebase configuration
+// Your web app's Firebase configuration.
+/**
+ * CDN source: https://console.firebase.google.com/project/a-game-9c74b/settings/general/web:NWVhYjQwY2MtMDNlYy00OGU5LWFkMTEtYjYwMTI5MzY5MGQ0
+ */
 var firebaseConfig = {
     apiKey: "AIzaSyCCJQ7caXKHBoauJubhiWYarLcALUITOyw",
     authDomain: "a-game-9c74b.firebaseapp.com",
@@ -8,18 +11,17 @@ var firebaseConfig = {
     messagingSenderId: "508808118558",
     appId: "1:508808118558:web:1c92df236e6b671b3b490f"
 };
-// Initialize Firebase
+
+// Initialize Firebase.
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// ---------------------REMOVES LOGIN PERSISTENCE PER SESSION FOR TESTING. CAN REMOVE LATER OR KEEP------------------------
+/**
+ * Keeps authentication during current session.
+ * source: https://firebase.google.com/docs/auth/web/auth-state-persistence
+ */
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
   .then(function() {
-    // Existing and future Auth states are now persisted in the current
-    // session only. Closing the window would clear any existing state even
-    // if a user forgets to sign out.
-    // ...
-    // New sign-in will be persisted with session persistence.
     return firebase.auth().signInWithEmailAndPassword(email, password);
   })
   .catch(function(error) {
@@ -27,10 +29,10 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
     var errorCode = error.code;
     var errorMessage = error.message;
   });
-//--------------------------------------------------------------------------------------------------------------------------
 
 /**
- * Used to sign up a user with email and password
+ * Used to sign up a user with email and password.
+ * Sign up was adapted from: https://firebase.google.com/docs/auth/web/start
  */
 function signup() {
     let username  = document.getElementById("username").value;
@@ -43,9 +45,12 @@ function signup() {
             if (password.length >= 6) {
                 if (username.trim().length <= 10) {
                     firebase.auth().createUserWithEmailAndPassword(email, password).then(credential => {
-                        // find or create a collection, add a new document with key of UID
+
+                        /* Find or create a collection, add a new document with key of UID.
+                        return was adapted from : https://youtu.be/qWy9ylc3f9U?t=416 */
+                        
                         return db.collection('userProfile').doc(credential.user.uid).set({
-                            // set fields inside UID document in userProfile
+                            // Set fields inside UID document in userProfile.
                             username: username,
                             score: 0
                         });
@@ -78,15 +83,17 @@ function signup() {
 }
 
 /**
- * Used to login an existing user with email and password
+ * Used to login an existing user with email and password.
+ * // Sign In was adapted from: https://firebase.google.com/docs/auth/web/start
  */
 function login() {
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
     if (email.trim() != "" && password.trim() != "") {
+        
         firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
-            // on successful login, redirect to menu page
+            // On successful login, redirect to menu page.
             window.location.href = "menu.html";
         }).catch(function (error) {
             document.getElementById("loginAlert").style.display = "inline";
@@ -101,11 +108,3 @@ function login() {
         document.getElementById("loginAlert").innerHTML = "*Fields cannot be empty.";
     }
 }
-
-
-
-
-
-
-
-
