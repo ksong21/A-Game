@@ -1,0 +1,102 @@
+#maskHTML {
+    max-height: 80%;
+}
+
+/* Grid for mask images */
+.mask1 {
+    grid-area: "mask1";
+}
+
+.mask2 {
+    grid-area: "mask2";
+}
+
+.mask3 {
+    grid-area: "mask3";
+}
+
+.mask4 {
+    grid-area: "mask4";
+}
+
+.mask5 {
+    grid-area: "mask5";
+}
+
+.mask6 {
+    grid-area: "mask6";
+}
+
+/* Styles for mobile */
+@media (max-width: 800px) {
+    .imageContainer {
+        display: grid;
+        grid-template-areas:
+            "mask1 mask2 mask3"
+            "mask4 mask5 mask6";
+        grid-gap: 10%;
+        justify-content: center;
+    }
+
+    .faceImg {
+        margin-top: 10%;
+        margin-bottom: 10%;
+    }
+
+    /* Images for mobile */
+    .faceImg,
+    #mask1,
+    #mask2,
+    #mask3,
+    #mask4,
+    #mask5,
+    #mask6 {
+        width: 20vw;
+        height: 10vh;
+    }
+
+}
+
+/* Styles for desktop */
+@media (min-width: 801px) {
+    .imageContainer {
+        display: grid;
+        grid-template-areas:
+            "mask1 mask2 mask3"
+            "mask4 mask5 mask6";
+        grid-gap: 15%;
+        justify-content: center;
+    }
+
+    /* Images for desktop */
+    .faceImg,
+    #mask1,
+    #mask2,
+    #mask3,
+    #mask4,
+    #mask5,
+    #mask6 {
+        width: 150px;
+        height: 150px;
+    }
+
+}
+
+/* Font for questions and answers */
+#item1 {
+    text-align: center;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: large;
+}
+
+/* Question and description text */ 
+#maskQuestion,
+#maskDescription {
+    margin-top: 1%;
+}
+
+/* Face */
+#face {
+    text-align: center;
+    margin-bottom: 3%;
+}

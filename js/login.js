@@ -1,0 +1,111 @@
+// Your web app's Firebase configuration
+var firebaseConfig = {
+    apiKey: "AIzaSyCCJQ7caXKHBoauJubhiWYarLcALUITOyw",
+    authDomain: "a-game-9c74b.firebaseapp.com",
+    databaseURL: "https://a-game-9c74b.firebaseio.com",
+    projectId: "a-game-9c74b",
+    storageBucket: "a-game-9c74b.appspot.com",
+    messagingSenderId: "508808118558",
+    appId: "1:508808118558:web:1c92df236e6b671b3b490f"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// ---------------------REMOVES LOGIN PERSISTENCE PER SESSION FOR TESTING. CAN REMOVE LATER OR KEEP------------------------
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+  .then(function() {
+    // Existing and future Auth states are now persisted in the current
+    // session only. Closing the window would clear any existing state even
+    // if a user forgets to sign out.
+    // ...
+    // New sign-in will be persisted with session persistence.
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+  })
+  .catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+  });
+//--------------------------------------------------------------------------------------------------------------------------
+
+/**
+ * Used to sign up a user with email and password
+ */
+function signup() {
+    let username  = document.getElementById("username").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (username.trim() != "" && email.trim() != "" && password.trim() != "" && confirmPassword.trim() != "") {
+        if (password == confirmPassword) {
+            if (password.length >= 6) {
+                if (username.trim().length <= 10) {
+                    firebase.auth().createUserWithEmailAndPassword(email, password).then(credential => {
+                        // find or create a collection, add a new document with key of UID
+                        return db.collection('userProfile').doc(credential.user.uid).set({
+                            // set fields inside UID document in userProfile
+                            username: username,
+                            score: 0
+                        });
+                    }).then(() => {
+                        window.location.href = "menu.html";
+                    }).catch(function (error) {
+                        document.getElementById("signUpAlert").style.display = "inline";
+                        document.getElementById("signUpAlert").innerHTML = "*" + error.message;
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                
+                        console.log(errorCode + "\n" + errorMessage);
+                    });
+                } else {
+                    document.getElementById("signUpAlert").style.display = "inline";
+                    document.getElementById("signUpAlert").innerHTML = "*Username cannot be more than 10 characters.";
+                }
+            } else {
+                document.getElementById("signUpAlert").style.display = "inline";
+                document.getElementById("signUpAlert").innerHTML = "*Password must be 6 characters or more.";
+            }
+        } else {
+            document.getElementById("signUpAlert").style.display = "inline";
+            document.getElementById("signUpAlert").innerHTML = "*Password must match.";
+        }
+    } else {
+        document.getElementById("signUpAlert").style.display = "inline";
+        document.getElementById("signUpAlert").innerHTML = "*Fields cannot be empty.";
+    }
+}
+
+/**
+ * Used to login an existing user with email and password
+ */
+function login() {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    if (email.trim() != "" && password.trim() != "") {
+        firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
+            // on successful login, redirect to menu page
+            window.location.href = "menu.html";
+        }).catch(function (error) {
+            document.getElementById("loginAlert").style.display = "inline";
+            document.getElementById("loginAlert").innerHTML = "*Email and password combination does not exist.";
+            var errorCode = error.code;
+            var errorMessage = error.message;
+    
+            console.log(errorCode + "\n" + errorMessage);
+        });
+    } else {
+        document.getElementById("loginAlert").style.display = "inline";
+        document.getElementById("loginAlert").innerHTML = "*Fields cannot be empty.";
+    }
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="images/favicon.ico" rel="icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style/easterEgg.css">
+        <link rel="stylesheet" href="style/menu.css">
+        <link rel="stylesheet" href="style/leaderboard.css">
+        <link rel="stylesheet" href="style/game_handwash.css">
+        <link rel="stylesheet" href="style/nextGame.css">
+        <link rel="stylesheet" href="style/game_sneeze.css">
+        <link rel="stylesheet" href="style/game_push.css">
+        <link rel="stylesheet" href="style/game_mask.css">
+        <link rel="stylesheet" href="style/game_clap.css">
+        <link rel="stylesheet" href="style/timer.css">
+        <link rel="stylesheet" href="style/game_quiz.css">
+        <link rel="stylesheet" href="style/gameover.css">
+        <link rel="stylesheet" href="style/profile.css">
+
+        <link rel="stylesheet" href="style/pause.css">
+
+    </head>
+    <body>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
+
+        <!-- Other JS -->
+        <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+        <script src="js/easteregg.js"></script>
+        <script src="js/game_handwash.js"></script>
+        <script src="js/game_mask.js"></script>
+        <script src="js/game_push.js"></script>
+        <script src="js/game_quiz.js"></script>
+        <script src="js/game_sneeze.js"></script>
+        <script src="js/game_clap.js"></script>
+        <script src="js/game_buttonpress.js"></script>
+        <script src="js/profile.js"></script>
+        <script src="js/pause.js"></script>
+        <script src="js/universalButtons.js"></script>
+        <script src="js/menu.js"></script>
+        <script src="js/leaderboard.js"></script>
+        <script src="js/nextGame.js"></script>
+        <script src="js/timer.js"></script>
+        <script src="js/gameover.js"></script>
+        <script src="js/update_score.js"></script>
+        <script src="js/login.js"></script>
+       
+        <div id="soundOverlay">
+            <p id="soundOption">Volume ON!</p>
+            <button onclick="soundOk()" id="soundOk">Ok</button>
+        </div>
+
+        <video autoplay muted loop id="myVideo">
+            <source src="images/background.mp4" type="video/mp4">
+        </video>
+    </body>
+</html>

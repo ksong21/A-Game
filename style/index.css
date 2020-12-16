@@ -1,0 +1,105 @@
+body {
+    background-color: rgb(242, 242, 242);
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+#loginBox {
+    position: absolute;
+    width: 30%;
+    top: 33%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+    "email email"
+    "password password"
+    "login signup"
+    "alert alert";
+    grid-gap: 10px;
+    background-color: rgb(50,50,50);
+    padding: 40px;
+    border-radius: 5px;
+}
+@media (max-width: 500px) {
+    #loginBox {
+        position: absolute;
+        width: 60%;
+        top: 40%;
+        left: 50%;
+        transform: translateX(-50%);
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+        "email email"
+        "password password"
+        "login signup"
+        "alert alert";
+        grid-gap: 10px;
+        background-color: rgb(50,50,50);
+        padding: 30px;
+        border-radius: 5px;
+    }
+}
+input {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    display: block;
+    padding: 5px;
+}
+#email {
+    grid-area: email;
+}
+#password {
+    grid-area: password;
+}
+#login {
+    grid-area: login;
+}
+#signup {
+    grid-area: signup;
+}
+button {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover {
+    color: white;
+    background-color: rgb(50, 50, 50);
+}
+#gameName {
+    width: 250px;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 50px;
+    transition-duration: 1s;
+}
+@media (max-width: 500px) {
+    #gameName {
+        width: 250px;
+        position: absolute;
+        top: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 50px;
+        transition-duration: 1s;
+    }
+}
+video {
+    width: 100%;
+    position: fixed;
+    margin-left: -8px;
+    z-index: -1;
+    bottom: -15px;
+}
+#loginAlert {
+    grid-area: alert;
+    display: none;
+    color: rgb(158, 0, 0);
+    font-weight: bold;
+    text-shadow: 0.5px 0.5px white;
+    margin-bottom: -10px;
+}
